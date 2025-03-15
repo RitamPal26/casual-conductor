@@ -1,9 +1,10 @@
 
 import React, { useEffect } from 'react';
-import { ArrowLeft, Settings, Trophy, Users, History, Gift, CreditCard, LogOut } from 'lucide-react';
+import { ArrowLeft, Settings, Trophy, Users, History, Gift, CreditCard, LogOut, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 const Profile = () => {
   const navigate = useNavigate();
