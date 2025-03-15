@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { ArrowLeft, Settings, Trophy, Users, History, Gift, CreditCard, LogOut, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -91,28 +90,30 @@ const Profile = () => {
             icon={<History size={20} className="text-green-500" />}
             title="Game History"
             subtitle="View your past matches"
-            onClick={() => {}}
+            onClick={() => navigate('/game-history')}
           />
           
           <ProfileLink 
             icon={<Gift size={20} className="text-purple-500" />}
             title="Rewards"
             subtitle="Claim your daily bonuses"
-            onClick={() => {}}
+            onClick={() => navigate('/rewards')}
           />
           
           <ProfileLink 
             icon={<CreditCard size={20} className="text-amber-500" />}
             title="Payment Methods"
             subtitle="Manage your payment options"
-            onClick={() => {}}
+            onClick={() => navigate('/payments')}
           />
           
           <ProfileLink 
             icon={<LogOut size={20} className="text-red-500" />}
             title="Sign Out"
             subtitle="Log out of your account"
-            onClick={() => {}}
+            onClick={() => {
+              navigate('/');
+            }}
             variant="danger"
           />
         </div>
