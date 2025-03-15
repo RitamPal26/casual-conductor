@@ -18,7 +18,7 @@ export function SalesBanner({
   subtitle, 
   ctaText, 
   discount, 
-  backgroundImage = 'linear-gradient(to right, #0078D7, #5ac8fa)',
+  backgroundImage = 'linear-gradient(to right, #0f172a, #0d9488)',
   onDismiss,
   onCTA
 }: SalesBannerProps) {
@@ -64,7 +64,7 @@ export function SalesBanner({
         
         <button 
           onClick={onCTA}
-          className="flex items-center gap-1 text-xs font-medium bg-white/20 hover:bg-white/30 transition-colors px-3 py-1.5 rounded-full backdrop-blur-sm"
+          className="flex items-center gap-1 text-xs font-medium bg-white/20 hover:bg-white/30 transition-colors px-3 py-1.5 rounded-full backdrop-blur-sm hover:scale-105 active:scale-95"
         >
           {ctaText}
           <ArrowRight size={12} />
