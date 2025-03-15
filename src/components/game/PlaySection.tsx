@@ -1,0 +1,92 @@
+
+import React, { useState } from 'react';
+import { Play, Shield, Trophy, Zap } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { useNavigate } from 'react-router-dom';
+
+type GameMode = 'ranked' | 'unranked' | 'casual';
+
+interface PlaySectionProps {
+  onPlay: (mode: GameMode) => void;
+}
+
+export function PlaySection({ onPlay }: PlaySectionProps) {
+  const [selectedMode, setSelectedMode] = useState<GameMode>('casual');
+  const navigate = useNavigate();
+  
+  const handlePlayClick = () => {
+    onPlay(selectedMode);
+    navigate('/gameplay');
+  };
+  
+  return (
+    <div className="w-full">
+      <div className="mb-6 flex flex-col items-center justify-center">
+        <button 
+          onClick={handlePlayClick}
+          className="w-40 h-40 rounded-full bg-gradient-to-br from-game-primary to-game-accent flex items-center justify-center mb-4 shadow-lg hover:shadow-xl transition-all duration-300 active:scale-95 animate-pulse-subtle overflow-hidden group"
+        >
+          <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <Play size={60} fill="white" className="text-white ml-4" />
+        </button>
+        
+        <div className="w-full px-8 flex items-center justify-between gap-3 py-2">
+          <GameModeButton 
+            mode="ranked" 
+            icon={<Trophy size={20} />} 
+            label="Ranked" 
+            isSelected={selectedMode === 'ranked'} 
+            onClick={() => setSelectedMode('ranked')} 
+          />
+          
+          <GameModeButton 
+            mode="unranked" 
+            icon={<Shield size={20} />} 
+            label="Unranked" 
+            isSelected={selectedMode === 'unranked'} 
+            onClick={() => setSelectedMode('unranked')} 
+          />
+          
+          <GameModeButton 
+            mode="casual" 
+            icon={<Zap size={20} />} 
+            label="Casual" 
+            isSelected={selectedMode === 'casual'} 
+            onClick={() => setSelectedMode('casual')} 
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface GameModeButtonProps {
+  mode: GameMode;
+  icon: React.ReactNode;
+  label: string;
+  isSelected: boolean;
+  onClick: () => void;
+}
+
+function GameModeButton({ mode, icon, label, isSelected, onClick }: GameModeButtonProps) {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        "flex flex-col items-center gap-1 p-3 rounded-xl transition-all duration-200 relative",
+        isSelected 
+          ? "text-game-primary" 
+          : "text-gray-500 hover:text-gray-700"
+      )}
+    >
+      {isSelected && (
+        <div className="absolute inset-0 bg-blue-50 rounded-xl animate-scale-in" />
+      )}
+      <span className="z-10">{icon}</span>
+      <span className="text-xs font-medium z-10">{label}</span>
+      {isSelected && (
+        <div className="absolute bottom-0 w-1/2 h-0.5 bg-game-primary rounded-full animate-scale-in" />
+      )}
+    </button>
+  );
+}
