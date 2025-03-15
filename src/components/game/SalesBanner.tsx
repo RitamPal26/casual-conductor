@@ -46,12 +46,9 @@ export function SalesBanner({
         isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       )}
       style={{ 
-        background: `var(--banner-bg, ${backgroundImage})`,
+        background: backgroundImage,
       }}
     >
-      {/* Use global CSS variables instead of inline style tag */}
-      <div className="dark-mode-styles" />
-      
       <button 
         onClick={handleDismiss}
         className="absolute top-2 right-2 text-white/80 hover:text-white transition-colors hover-scale"
@@ -78,17 +75,6 @@ export function SalesBanner({
           <ArrowRight size={12} />
         </button>
       </div>
-      
-      <style>
-        {`
-          :root {
-            --banner-bg: ${backgroundImage};
-          }
-          .dark {
-            --banner-bg: ${darkModeBackground};
-          }
-        `}
-      </style>
     </div>
   );
 }
