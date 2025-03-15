@@ -24,6 +24,9 @@ export function SalesBanner({
 }: SalesBannerProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Define dark mode background
+  const darkModeBackground = 'linear-gradient(to right, #1F2937, #0d9488)';
 
   useEffect(() => {
     setIsLoaded(true);
@@ -36,24 +39,18 @@ export function SalesBanner({
 
   if (!isVisible) return null;
 
-  const darkModeBackground = 'linear-gradient(to right, #1F2937, #0d9488)';
-
   return (
     <div 
       className={cn(
         "relative w-full p-4 overflow-hidden transition-all duration-500 ease-out transform animate-fade",
         isLoaded ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
       )}
-      style={{ background: 'var(--banner-bg, backgroundImage)' }}
+      style={{ 
+        background: `var(--banner-bg, ${backgroundImage})`,
+      }}
     >
-      <style jsx>{`
-        :root {
-          --banner-bg: ${backgroundImage};
-        }
-        .dark {
-          --banner-bg: ${darkModeBackground};
-        }
-      `}</style>
+      {/* Use global CSS variables instead of inline style tag */}
+      <div className="dark-mode-styles" />
       
       <button 
         onClick={handleDismiss}
@@ -81,6 +78,17 @@ export function SalesBanner({
           <ArrowRight size={12} />
         </button>
       </div>
+      
+      <style>
+        {`
+          :root {
+            --banner-bg: ${backgroundImage};
+          }
+          .dark {
+            --banner-bg: ${darkModeBackground};
+          }
+        `}
+      </style>
     </div>
   );
 }
