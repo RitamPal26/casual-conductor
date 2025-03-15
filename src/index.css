@@ -43,6 +43,14 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Game-specific color variables */
+    --game-primary: 210 100% 42%;
+    --game-secondary: 205 29% 13%;
+    --game-accent: 199 95% 67%;
+    --game-deep-blue: 222 47% 11%;
+    --game-teal: 174 84% 32%;
+    --game-background: 0 0% 96%;
   }
 
   .dark {
@@ -81,12 +89,21 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Game-specific dark mode color variables */
+    --game-primary: 214 100% 60%;
+    --game-secondary: 205 29% 90%;
+    --game-accent: 199 95% 67%;
+    --game-deep-blue: 222 47% 11%;
+    --game-teal: 174 84% 42%;
+    --game-background: 215 28% 17%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, opacity 0.3s ease;
   }
 
   body {
@@ -100,6 +117,10 @@
     @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm;
   }
   
+  .dark .glass {
+    @apply bg-dark-card/70 backdrop-blur-md border border-dark-border/20 shadow-sm text-dark-foreground;
+  }
+  
   .text-balance {
     text-wrap: balance;
   }
@@ -107,19 +128,47 @@
   .text-shadow {
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   }
+
+  .dark .text-shadow {
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .animate-fade {
+    animation: fade-in 0.3s ease-in-out;
+  }
+
+  .animate-slide {
+    animation: slide-in 0.3s ease-in-out;
+  }
+
+  .hover-scale {
+    @apply transition-transform duration-200 hover:scale-105 active:scale-95;
+  }
+
+  .interactive-button {
+    @apply transform transition-all duration-200 hover:scale-105 active:scale-95 hover:shadow-md;
+  }
 }
 
 @layer components {
   .game-button {
-    @apply relative flex items-center justify-center px-6 py-4 overflow-hidden font-medium transition-all bg-white rounded-xl shadow-md hover:shadow-lg active:scale-[0.98] active:shadow-sm;
+    @apply relative flex items-center justify-center px-6 py-4 overflow-hidden font-medium transition-all bg-white rounded-xl shadow-md hover:shadow-lg active:scale-[0.98] active:shadow-sm hover-scale;
   }
   
   .game-button-primary {
     @apply game-button bg-gradient-to-r from-game-primary to-game-accent text-white;
   }
+
+  .dark .game-button-primary {
+    @apply game-button bg-gradient-to-r from-dark-primary to-dark-accent text-dark-foreground;
+  }
   
   .game-button-secondary {
     @apply game-button bg-white text-game-secondary border border-game-border;
+  }
+
+  .dark .game-button-secondary {
+    @apply game-button bg-dark-card text-dark-foreground border border-dark-border;
   }
   
   .game-button-small {
@@ -127,7 +176,19 @@
   }
   
   .game-card {
-    @apply relative overflow-hidden bg-game-card rounded-2xl p-4 shadow-sm border border-game-border transition-all duration-300 hover:shadow-md;
+    @apply relative overflow-hidden bg-game-card rounded-2xl p-4 shadow-sm border border-game-border transition-all duration-300 hover:shadow-md animate-fade;
+  }
+
+  .dark .game-card {
+    @apply bg-dark-card border-dark-border text-dark-foreground;
+  }
+
+  .page-container {
+    @apply min-h-screen p-4 transition-colors duration-300 animate-fade;
+  }
+
+  .section-container {
+    @apply w-full mb-6 rounded-xl p-4 animate-fade;
   }
 }
 

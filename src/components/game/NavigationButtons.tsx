@@ -17,19 +17,19 @@ function NavButton({ icon, label, onClick, variant = 'primary', delay = 0 }: Nav
     <button
       onClick={onClick}
       className={cn(
-        "game-button w-full flex items-center justify-start gap-3 py-3.5 px-5 rounded-xl transition-all duration-300",
+        "game-button w-full flex items-center justify-start gap-3 py-3.5 px-5 rounded-xl transition-all duration-300 animate-fade",
         "hover:scale-[1.02] active:scale-[0.98] hover:shadow-md",
         variant === 'primary' 
-          ? 'bg-white/90 backdrop-blur-sm text-game-deep-blue shadow-sm border border-white/10' 
-          : 'bg-white/40 backdrop-blur-sm text-game-deep-blue/80 border border-white/10'
+          ? 'bg-white/90 backdrop-blur-sm text-game-deep-blue shadow-sm border border-white/10 dark:bg-dark-card/90 dark:text-dark-foreground dark:border-dark-border/10' 
+          : 'bg-white/40 backdrop-blur-sm text-game-deep-blue/80 border border-white/10 dark:bg-dark-card/40 dark:text-dark-foreground/80 dark:border-dark-border/10'
       )}
       style={{ animationDelay: `${delay}ms` }}
     >
       <span className={cn(
         "flex items-center justify-center w-9 h-9 rounded-full",
         variant === 'primary' 
-          ? 'bg-gradient-to-br from-game-teal to-game-soft-teal text-white' 
-          : 'bg-white/70 text-game-teal'
+          ? 'bg-gradient-to-br from-game-teal to-game-soft-teal text-white dark:from-teal-600 dark:to-teal-400' 
+          : 'bg-white/70 text-game-teal dark:bg-dark-card/70 dark:text-teal-400'
       )}>
         {icon}
       </span>
@@ -42,7 +42,7 @@ export function NavigationButtons() {
   const navigate = useNavigate();
   
   return (
-    <div className="w-full space-y-3 px-1">
+    <div className="w-full space-y-3 px-1 animate-slide">
       <NavButton 
         icon={<Trophy size={18} />} 
         label="Leaderboard" 
@@ -50,9 +50,9 @@ export function NavigationButtons() {
         delay={100}
       />
       
-      <div className="relative pl-4 border-l-2 border-white/20 py-2 space-y-2">
-        <div className="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-game-teal" />
-        <span className="text-xs font-medium text-white/70 uppercase tracking-wider">Rules & Help</span>
+      <div className="relative pl-4 border-l-2 border-white/20 dark:border-dark-border/20 py-2 space-y-2">
+        <div className="absolute -left-1.5 top-0 w-3 h-3 rounded-full bg-game-teal dark:bg-teal-500" />
+        <span className="text-xs font-medium text-white/70 dark:text-dark-foreground/70 uppercase tracking-wider">Rules & Help</span>
         <NavButton 
           icon={<BookOpen size={18} />} 
           label="Interactive Tutorial" 

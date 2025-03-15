@@ -13,6 +13,7 @@ const Index = () => {
   useEffect(() => {
     // Trigger animations after component mounts
     setIsLoaded(true);
+    document.title = "Home - Mobile Game";
   }, []);
   
   const handlePlay = (mode: 'ranked' | 'unranked' | 'casual') => {
@@ -24,7 +25,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-game-deep-blue to-game-dark transition-colors duration-500">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-game-deep-blue to-game-dark transition-colors duration-500 dark:from-dark-background dark:to-gray-900 animate-theme-transition">
       <div className={`transition-all duration-500 ease-out transform ${isLoaded ? 'opacity-100' : 'opacity-0 -translate-y-8'}`}>
         {showBanner && (
           <SalesBanner 

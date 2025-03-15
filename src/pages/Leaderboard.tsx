@@ -33,27 +33,27 @@ const Leaderboard = () => {
       case 3:
         return <Medal className="text-amber-600" size={20} />;
       default:
-        return <span className="text-sm font-bold text-gray-500">{position}</span>;
+        return <span className="text-sm font-bold text-gray-500 dark:text-gray-400">{position}</span>;
     }
   };
   
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-      <div className="sticky top-0 z-10 bg-white shadow-sm">
-        <div className="flex items-center px-4 py-4">
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white dark:from-gray-800 dark:to-gray-900 dark:text-gray-100 transition-colors duration-300 animate-fade">
+      <div className="sticky top-0 z-10 bg-white dark:bg-gray-800 shadow-sm">
+        <div className="flex items-center px-4 py-4 animate-fade">
           <button 
             onClick={() => navigate('/')}
-            className="mr-4"
+            className="mr-4 hover-scale"
             aria-label="Go back"
           >
-            <ArrowLeft size={24} />
+            <ArrowLeft size={24} className="text-gray-700 dark:text-gray-300" />
           </button>
           <h1 className="text-xl font-bold">Leaderboard</h1>
         </div>
       </div>
       
       <div className="p-4">
-        <div className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-6 text-white mb-4">
+        <div className="bg-gradient-to-br from-blue-500 to-blue-600 dark:from-blue-700 dark:to-blue-900 rounded-xl p-6 text-white mb-4 animate-fade" style={{ animationDelay: '100ms' }}>
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-semibold">Season Ranking</h2>
             <Trophy size={24} />
@@ -69,7 +69,8 @@ const Leaderboard = () => {
           {leaderboardData.map((player, index) => (
             <div 
               key={player.id}
-              className="flex items-center bg-white rounded-lg p-3 shadow-sm border border-gray-100"
+              className="flex items-center bg-white dark:bg-gray-800 rounded-lg p-3 shadow-sm border border-gray-100 dark:border-gray-700 hover-scale animate-fade"
+              style={{ animationDelay: `${(index + 1) * 50}ms` }}
             >
               <div className="flex items-center justify-center w-8 h-8 mr-3">
                 {getLeaderIcon(index + 1)}
@@ -77,7 +78,7 @@ const Leaderboard = () => {
               
               <Avatar className="h-10 w-10 mr-3">
                 <AvatarImage src={player.avatarUrl} alt={player.username} />
-                <AvatarFallback className="bg-blue-100 text-blue-600">
+                <AvatarFallback className="bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300">
                   {player.username.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
@@ -86,17 +87,17 @@ const Leaderboard = () => {
                 <div className="flex items-center">
                   <span className="font-medium">{player.username}</span>
                   {index < 3 && (
-                    <span className="ml-2 inline-block px-2 py-0.5 bg-blue-100 text-blue-600 text-xs rounded-full">
+                    <span className="ml-2 inline-block px-2 py-0.5 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 text-xs rounded-full">
                       Top {index + 1}
                     </span>
                   )}
                 </div>
-                <div className="text-xs text-gray-500">{player.rank}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">{player.rank}</div>
               </div>
               
               <div className="text-right">
-                <div className="font-bold text-gray-700">{player.points.toLocaleString()}</div>
-                <div className="text-xs text-gray-500">points</div>
+                <div className="font-bold text-gray-700 dark:text-gray-300">{player.points.toLocaleString()}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">points</div>
               </div>
             </div>
           ))}
